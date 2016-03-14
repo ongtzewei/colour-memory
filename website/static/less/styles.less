@@ -1,0 +1,20 @@
+@import "colours.less";
+@base-url: "//cronuts.com:8080/static";
+
+html {
+  background: @black;
+  body {
+    width: 720px;
+    height: 576px;
+    background: @white;
+    position: relative;
+    .animated-loading {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 120px;
+      height: 120px;
+      background: url("@{base-url}/img/loading.gif") no-repeat;
+    }  
+  }
+}
