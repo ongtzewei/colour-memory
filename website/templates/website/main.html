@@ -1,0 +1,65 @@
+{% extends "website/base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+{{block.super}}
+<style>
+	.game-view {
+		width: 700px;
+		height: 550px;
+	}
+	.menu-overlay {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+</style>
+{% endblock %}
+
+{% block container %}
+<div class="game-view" ui-view></div>
+{% endblock %}
+
+<div class="menu-overlay">
+	<a class="btn btn-default" ui-sref="splash">Splash</a>
+	<a class="btn btn-default" ui-sref="easy">Easy</a>
+	<a class="btn btn-default" ui-sref="easy">Difficult</a>
+</div>	
+
+
+{% block javascript %}
+{{block.super}}
+<script src="{% static 'js/controllers.js' %}"></script>
+<script type="text/javascript">
+(function() {
+	"use strict";
+	var app = angular.module("gameApp");
+	app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+		var splashState = {
+			name: "splash",
+			url: "/",
+			templateUrl: "{% static 'html/splash.html' %}",
+			controller: "SplashCtrl",
+		};
+		var homeState = {
+			name: "home",
+			url: "/home",
+			templateUrl: "{% static 'html/home.html' %}",
+			controller: "HomeCtrl",
+		};
+		var gameState = {
+			name: "easy",
+			url: "/game-easy", 
+			templateUrl: "{% static 'html/game.html' %}",
+			controller: "GameCtrl",
+		};
+
+		$urlRouterProvider.when("", "/");
+		$stateProvider
+			.state(splashState)
+			.state(homeState)
+			.state(gameState);
+	});
+})();
+</script>
+{% endblock javascript %}

@@ -1,13 +1,18 @@
 @import "colours.less";
+@import "card.less";
+
 @base-url: "//cronuts.com:8080/static";
 
 html {
   background: @black;
-  body {
+  
+  body.container-fluid {
     width: 720px;
     height: 576px;
     background: @white;
     position: relative;
+    margin: 0px;
+    padding: 0px;
     .animated-loading {
       position: absolute;
       bottom: 2px;
@@ -15,6 +20,27 @@ html {
       width: 120px;
       height: 120px;
       background: url("@{base-url}/img/loading.gif") no-repeat;
-    }  
+    }
+  }
+  .splash-view {
+    opacity: 0;
+  }
+  .splash-view.fade-in {
+    background: url("@{base-url}/img/splash.png") no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 550px;
+    opacity: 1;
+    transition: opacity 2s ease-in;
+  }
+  
+  .game-view {
+    .logo {
+      content:url("@{base-url}/img/logo.png");
+      border: none; 
+    }
+    .cards {
+      display: inline-block;
+    }
   }
 }

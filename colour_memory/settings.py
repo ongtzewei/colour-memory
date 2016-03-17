@@ -31,13 +31,16 @@ INSTALLED_APPS = [
 
 BOWER_INSTALLED_APPS = (
     'angular',
+    'angular-animate',
     'angular-bootstrap',
     'angular-cookies',
     'angular-loading-bar',
     'angular-resource',
     'angular-ui-router',
+    'bootstrap',
     'font-awesome',
     'less',
+    'threejs',
     'toastr',
 )
     

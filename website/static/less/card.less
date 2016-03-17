@@ -1,0 +1,64 @@
+card {
+  display: inline-block;
+  width: 80px;
+  height: 120px;
+  padding: 3px 5px;
+  margin: 10px;  
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  .front, .back {
+    width: 80px;
+    height: 120px;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+ .front {
+    z-index: 2;
+    transform: rotateY(180deg);
+  }
+  .front.card0 {
+    background: url("@{base-url}/img/card0.gif") no-repeat center;
+    background-size: cover;
+  }
+  .front.card1 {
+    background: url("@{base-url}/img/card1.gif") no-repeat center;
+    background-size: cover;
+  }
+  .front.card2 {
+    background: url("@{base-url}/img/card2.gif") no-repeat center;
+    background-size: cover;
+  }
+  .front.card3 {
+    background: url("@{base-url}/img/card3.gif") no-repeat center;
+    background-size: cover;
+  }
+  .front.card4 {
+    background: url("@{base-url}/img/card4.gif") no-repeat center;
+    background-size: cover;
+  }
+  .front.card5 {
+    background: url("@{base-url}/img/card5.gif") no-repeat center;
+    background-size: cover;
+  }
+  .front.card6 {
+    background: url("@{base-url}/img/card6.gif") no-repeat center;
+    background-size: cover;
+  }
+  .front.card7 {
+    background: url("@{base-url}/img/card7.gif") no-repeat center;
+    background-size: cover;
+  }
+  .back {
+    background: url("@{base-url}/img/back.gif") no-repeat center;
+    background-size: cover;
+    transform: rotateY(0deg);
+  }
+}
+card.flip {
+  transform: rotateY(180deg);
+}
+
