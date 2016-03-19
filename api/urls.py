@@ -1,11 +1,16 @@
+from api import views
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^ranking/$', views.RankingList.as_view(), name='ranking-list'),
+    url(r'^players/$', views.PlayerList.as_view(), name='player-list'),
+    url(r'^players/(?P<pk>[-\w]+)$', views.PlayerDetail.as_view(), name='player-detail'),
+    url(r'^', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 if settings.DEBUG:

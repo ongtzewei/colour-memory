@@ -1,3 +1,17 @@
-<div class="container">
-	<h1>Home Page</h1>
+<div class="home-view" ng-init="initHome();">
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<h1 class="text-center"><i class="fa fa-fw fa-trophy"></i> Today's Ranking</h1>
+			<hr>
+			<ul class="list-unstyled text-left">
+				<li ng-repeat="player in ranking">
+					<i class="fa fa-fw fa-trophy" ng-class="($index<2)?'gold-trophy':($index<5)?'silver-trophy':'bronze-trophy'"></i>{[{player.name}]} 
+					<score class="pull-right"><strong>{[{player.score}]}</strong></score>
+				</li>
+			</ul>
+		</div>
+		<div class="col-xs-6 col-xs-offset-3 game-options">
+			<a class="btn btn-lg btn-block btn-primary" ui-sref="game"><i class="fa fa-fw fa-gamepad"></i> Start Game</a>
+		</div>
+	</div>
 </div>

@@ -17,19 +17,15 @@
 {% endblock %}
 
 {% block container %}
-<div class="game-view" ui-view></div>
+<div ui-view></div>
 {% endblock %}
-
-<div class="menu-overlay">
-	<a class="btn btn-default" ui-sref="splash">Splash</a>
-	<a class="btn btn-default" ui-sref="easy">Easy</a>
-	<a class="btn btn-default" ui-sref="easy">Difficult</a>
-</div>	
-
 
 {% block javascript %}
 {{block.super}}
-<script src="{% static 'js/controllers.js' %}"></script>
+<script src="{% static 'js/controllers/splash-controller.js' %}"></script>
+<script src="{% static 'js/controllers/home-controller.js' %}"></script>
+<script src="{% static 'js/controllers/game-controller.js' %}"></script>
+<script src="{% static 'js/controllers/game-modal-controller.js' %}"></script>
 <script type="text/javascript">
 (function() {
 	"use strict";
@@ -48,12 +44,11 @@
 			controller: "HomeCtrl",
 		};
 		var gameState = {
-			name: "easy",
-			url: "/game-easy", 
+			name: "game",
+			url: "/game", 
 			templateUrl: "{% static 'html/game.html' %}",
 			controller: "GameCtrl",
 		};
-
 		$urlRouterProvider.when("", "/");
 		$stateProvider
 			.state(splashState)

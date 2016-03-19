@@ -1,25 +1,11 @@
 (function() {
 	"use strict";
 	var app = angular.module("gameApp");
-	
-	app.controller("SplashCtrl", function($scope, $state, $timeout) {
-		$timeout(function() {
-			$scope.fadeIn = true;
-		}, 500);
-		$timeout(function() {
-			$state.go("home");
-		}, 3500);
-		
-	});
-	
-	app.controller("HomeCtrl", function($scope) {
-		$scope.name = "Home Controller";
-	});
-	
-	app.controller("GameCtrl", function($scope, $timeout, $uibModal) {
+	app.controller("GameCtrl", function($scope, $state, $timeout, $uibModal) {
 		$scope.name = "Game Controller";
 		$scope.cards = [];
 		$scope.exposedCards = [];
+		$scope.clearedCards = 0;
 		$scope.playSound = false;
 		$scope.state = undefined;
 		
@@ -67,12 +53,17 @@
 		};
 		
 		$scope.flipCard = function(card) {
+			// prevent exposed cards from exceeding the required number
+			if($scope.exposedCards.length==GAME.REQUIRED_NUM_MATCHES) return;
+			
 			card.flip();
 			$scope.exposedCards.push(card);
+			$scope.checkGameConditions();
+		};
+		
+		$scope.checkGameConditions = function() {
 			
-			// no more uncovered cards, player wins
-			
-			
+			$scope.showModal(GAME.MODAL.GAME_WIN);
 			switch($scope.exposedCards.length) {
 				
 				/*
@@ -95,6 +86,7 @@
 						}
 						$scope.state.score += GAME.MATCH_POINTS;
 						GAME.AUDIO.Match.play();
+						$scope.clearedCards += GAME.REQUIRED_NUM_MATCHES;
 						$scope.exposedCards.length=0;
 					} else {
 						$timeout(function() {
@@ -107,31 +99,38 @@
 						GAME.AUDIO.NoMatch.play();
 					}
 				break;
-			} 
+			}
 			
+			// no more uncovered cards, player wins
+			if($scope.clearedCards==GAME.NUM_CARDS) {
+				GAME.AUDIO.GameWin.play();
+				$scope.showModal(GAME.MODAL.GAME_WIN);
+			}
+			// when score reaches zero, player loses
+			if($scope.state.score<=0) {
+				GAME.AUDIO.GameLose.play();
+				$scope.showModal(GAME.MODAL.GAME_LOSE);
+			}
 		};
 		
+		$scope.restartGame = function() {
+			$state.go($state.current, {}, {reload: true});
+		};
 		
-		
-		$scope.open = function (size) {
-
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: '/static/html/home.html',
-      controller: function($scope) {
-      	$scope.name = "adasdasdass";
-      },
-      size: size,
-      resolve: {
-        items: function () {
-          return $scope.items;
-        }
-      }
-    });
-
-    
-  };
-		
+		$scope.showModal = function(modalId) {
+			var modalInstance = $uibModal.open({
+				animation: true,
+				backdrop: "static",
+				keyboard: false,
+				windowClass: "game-state",
+				windowTopClass: "modal-opacity",
+				templateUrl: modalId,
+				resolve: { 
+					parentScope: function() { return $scope },
+				},
+				controller: "GameModalCtrl"
+			});
+		};
 		
 	});
 	

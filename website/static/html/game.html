@@ -18,30 +18,55 @@
 					</h1>
 				<p>Find matching pairs before your time limit runs out!</p>
 				<div class="menu-options">
-					<button class="btn btn-block btn-warning"><i class="fa fa-fw fa-refresh"></i> Restart</button>
+					<button class="btn btn-block btn-warning" ng-click="restartGame();"><i class="fa fa-fw fa-refresh"></i> Restart</button>
 					<button class="btn btn-block btn-default" ng-click="toggleSound();" ng-class="[{'btn-danger':!playSound, 'btn-success':playSound}]">
 						<i class="fa fa-fw fa-times" ng-if="!playSound"></i>
 						<i class="fa fa-fw fa-music" ng-if="playSound"></i> Sound</button>
-					<button class="btn btn-block btn-default"><i class="fa fa-fw fa-sign-out"></i> Quit</button>
+					<a class="btn btn-block btn-default" ui-sref="home"><i class="fa fa-fw fa-reply"></i> Back to Main</a>
 				</div>
 			</div>
 		</div>
+		
+		<script id="modalGameWin" type="text/ng-template">
+			<div class="modal-body text-center">
+				<div class="row">
+					<div class="col-xs-6 col-xs-offset-3">
+						<h1><i class="fa fa-fw fa-trophy"></i> Cards Cleared!</h1>
+						<p>Submit your score and rank yourself against all other daily players!</p>
+						<br>
+				
+						<form name="playerForm" ng-submit="submitScore();" novalidate>
+							<div class="input-group" ng-class="{'has-error':playerForm.name.$touched && playerForm.name.$invalid, 'has-success':playerForm.name.$valid}">
+								<span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+								<input class="form-control" type="text" name="name" ng-model="player.name" placeholder="Enter your name" ng-minlength="3" autocomplete="off" required>
+							</div>
+							<div class="text-danger text-left" ng-show="playerForm.name.$touched && playerForm.name.$invalid"><small>Please provide a name with more than 3 characters</small></div>
+							<div class="input-group" ng-class="{'has-error':playerForm.email.$touched && playerForm.email.$error.email, 'has-success':playerForm.email.$touched && playerForm.email.$valid}">
+								<span class="input-group-addon"><i class="fa fa-fw fa-envelope-o"></i></span>
+								<input class="form-control" type="email" name="email" ng-model="player.email" placeholder="Enter your email address">
+							</div>
+							<div class="text-left text-danger" ng-show="playerForm.email.$touched && playerForm.email.$error.email"><small>Please provide a valid email address</small></div>
+							<span class="help-block"><small>We will not share your email address publicly.</small></span>
+							<br>
+							<button type="submit" class="btn btn-primary btn-block" ng-disabled="playerForm.$invalid">Sign Up</button>
+							<button class="btn btn-block btn-default" type="button" ng-click="dismissModal()">No thanks</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</script>
+		
+		<script id="modalGameLose" type="text/ng-template">
+			<div class="modal-body text-center">
+				<div class="row">
+					<div class="col-xs-6 col-xs-offset-3">
+						<h1>You Lost...</h1>
+						<p>Retry?</p>
+						<button class="btn btn-block btn-info" type="button" ng-click="restartGame()">Bring it on!</button>
+						<button class="btn btn-block btn-warning" type="button" ng-click="returnMain()">No thanks</button>
+					</div>
+				</div>
+			</div>
+		</script>
 	</div>
-
-
-   <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
-
-<script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
-        </div>
-        <div class="modal-body">
-            stertreterterterte
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
 </div>

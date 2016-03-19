@@ -1,4 +1,5 @@
 {% load compress %}
+{% load hosts %}
 {% load staticfiles %}
 <!doctype html>
 <html class="no-js" lang="">
@@ -6,9 +7,23 @@
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<title>Colour Memory</title>
+		<meta name="application-name" content="Colour Memory"/>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no">
-		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<link rel="shortcut icon" href="{% static 'favicons/favicon.ico' %}"/>
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{% static 'favicons/apple-touch-icon-57x57.png' %}" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'favicons/apple-touch-icon-114x114.png' %}" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'favicons/apple-touch-icon-72x72.png' %}" />
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'apple-touch-icon-144x144.png' %}" />
+		<link rel="apple-touch-icon-precomposed" sizes="60x60" href="{% static 'favicons/apple-touch-icon-60x60.png' %}" />
+		<link rel="apple-touch-icon-precomposed" sizes="120x120" href="{% static 'favicons/apple-touch-icon-120x120.png' %}" />
+		<link rel="apple-touch-icon-precomposed" sizes="76x76" href="{% static 'favicons/apple-touch-icon-76x76.png' %}" />
+		<link rel="apple-touch-icon-precomposed" sizes="152x152" href="{% static 'favicons/apple-touch-icon-152x152.png' %}" />
+		<link rel="icon" type="image/png" href="{% static 'favicons/favicon-196x196.png' %}" sizes="196x196" />
+		<link rel="icon" type="image/png" href="{% static 'favicons/favicon-96x96.png' %}" sizes="96x96" />
+		<link rel="icon" type="image/png" href="{% static 'favicons/favicon-32x32.png' %}" sizes="32x32" />
+		<link rel="icon" type="image/png" href="{% static 'favicons/favicon-16x16.png' %}" sizes="16x16" />
+		<link rel="icon" type="image/png" href="{% static 'favicons/favicon-128.png' %}" sizes="128x128" />
 		{% compress css %}
 		<link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
@@ -36,6 +51,7 @@
 		<script src="{% static 'bower_components/three.js/build/three.min.js' %}"></script>
 		<script src="{% static 'js/card.js' %}"></script>
 		<script src="{% static 'js/app.js' %}"></script>
+		<script src="{% static 'js/factories.js' %}"></script>
 		<script src="{% static 'bower_components/less/dist/less.min.js' %}"></script>
 		<script type="text/javascript">
 			(function() {
@@ -49,8 +65,8 @@
 						GRID_COLS: 4,
 						REQUIRED_NUM_MATCHES: 2,
 						STARTING_SCORE: 100,
-						MATCH_POINTS: 20,
-						MISMATCH_PENALTY: 20,
+						MATCH_POINTS: 5,
+						MISMATCH_PENALTY: 5,
 						AUDIO: {
 							BGM: new Audio("{% static 'audio/cautious.mp3' %}"),
 							Click: new Audio("{% static 'audio/click.mp3' %}"),
@@ -58,7 +74,15 @@
 							NoMatch: new Audio("{% static 'audio/penalty.mp3' %}"),
 							GameWin: new Audio("{% static 'audio/win.wav' %}"),
 							GameLose: new Audio("{% static 'audio/lose.wav' %}"),
-						}
+						},
+						MODAL: {
+							GAME_WIN: "modalGameWin",
+							GAME_LOSE: "modalGameLose",
+						},
+						URL: {
+							APIPlayer: "{% host_url 'player-list' host 'api' %}",
+							APIRanking: "{% host_url 'ranking-list' host 'api' %}",
+						},
 					};
 					window.GAME = $rootScope.GAME;
 				});
