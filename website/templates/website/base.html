@@ -28,8 +28,11 @@
 		<link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
 		<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+		{% comment %}
 		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 		<link rel="stylesheet/less" href="{% static 'less/styles.less' %}" />
+		{% endcomment %}
 		{% block styles %}{% endblock styles %}
 		{% endcompress %}
 	</head>
@@ -52,7 +55,7 @@
 		<script src="{% static 'js/card.js' %}"></script>
 		<script src="{% static 'js/app.js' %}"></script>
 		<script src="{% static 'js/factories.js' %}"></script>
-		<script src="{% static 'bower_components/less/dist/less.min.js' %}"></script>
+		{% comment %}<script src="{% static 'bower_components/less/dist/less.min.js' %}"></script>{% endcomment %}
 		<script type="text/javascript">
 			(function() {
 				"use strict";
@@ -66,7 +69,7 @@
 						REQUIRED_NUM_MATCHES: 2,
 						STARTING_SCORE: 100,
 						MATCH_POINTS: 5,
-						MISMATCH_PENALTY: 5,
+						MISMATCH_PENALTY: 100,
 						AUDIO: {
 							BGM: new Audio("{% static 'audio/cautious.mp3' %}"),
 							Click: new Audio("{% static 'audio/click.mp3' %}"),

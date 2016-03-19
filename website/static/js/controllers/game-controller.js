@@ -63,19 +63,15 @@
 		
 		$scope.checkGameConditions = function() {
 			
-			$scope.showModal(GAME.MODAL.GAME_WIN);
 			switch($scope.exposedCards.length) {
+				case 1: 
+					//when only 1 card is uncovered, wait for player action
+				break;
 				
-				/*
-				 * when only 1 card is uncovered, wait for player action
-				 */
-				case 1: break;
-				
-				/* when number of cards matching requirements are uncovered,
-				 * if cards match, remove both cards and increment score
-				 * if cards do not match, cover  cards and deduct score
-				 */
 				case GAME.REQUIRED_NUM_MATCHES:
+					//when number of cards matching requirements are uncovered,
+					//if cards match, remove both cards and increment score
+					//if cards do not match, cover  cards and deduct score
 					var match = true;
 					for(var i=0;i<$scope.exposedCards.length-1;i++) {
 						match &= $scope.exposedCards[i].matches($scope.exposedCards[i+1]);
@@ -117,6 +113,12 @@
 			$state.go($state.current, {}, {reload: true});
 		};
 		
+		$scope.returnMain = function() {
+			console.log("returning");
+			GAME.AUDIO.BGM.pause();
+			$state.go("home");
+		};
+		
 		$scope.showModal = function(modalId) {
 			var modalInstance = $uibModal.open({
 				animation: true,
@@ -128,7 +130,7 @@
 				resolve: { 
 					parentScope: function() { return $scope },
 				},
-				controller: "GameModalCtrl"
+				controller: "GameModalCtrl",
 			});
 		};
 		

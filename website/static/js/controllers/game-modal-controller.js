@@ -17,7 +17,7 @@
 		};
 		$scope.returnMain = function() {
 			$uibModalInstance.dismiss('cancel');
-			$state.go("home");
+			parentScope.returnMain();
 		};
 	});
 })();

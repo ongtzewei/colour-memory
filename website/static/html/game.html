@@ -22,7 +22,7 @@
 					<button class="btn btn-block btn-default" ng-click="toggleSound();" ng-class="[{'btn-danger':!playSound, 'btn-success':playSound}]">
 						<i class="fa fa-fw fa-times" ng-if="!playSound"></i>
 						<i class="fa fa-fw fa-music" ng-if="playSound"></i> Sound</button>
-					<a class="btn btn-block btn-default" ui-sref="home"><i class="fa fa-fw fa-reply"></i> Back to Main</a>
+					<a class="btn btn-block btn-default" ng-click="returnMain();"><i class="fa fa-fw fa-reply"></i> Back to Main</a>
 				</div>
 			</div>
 		</div>
