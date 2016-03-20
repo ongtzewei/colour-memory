@@ -1,5 +1,7 @@
 from api.models import Player
 from api.serializers import PlayerSerializer, SimplePlayerSerializer
+from datetime import datetime, time, timedelta
+from django.utils import timezone
 from rest_framework import generics
 
 
@@ -27,4 +29,7 @@ class RankingList(generics.ListAPIView):
     serializer_class = SimplePlayerSerializer
     
     def get_queryset(self):
-        return Player.objects.all().order_by('-score')[:10]
+        now = timezone.now().date()
+        today_start = datetime.combine(now, time())
+        today_end = datetime.combine(now+timedelta(1), time())
+        return Player.objects.filter(date_created__lte=today_end, date_created__gte=today_start).order_by('-score')[:10]
