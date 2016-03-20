@@ -1,5 +1,4 @@
-@base-url: "https://urbanstyle.asia/static";
-@import "colours.less";
+@import "variables.less";
 @import "card.less";
 
 html {
@@ -68,24 +67,40 @@ html {
     margin: 10px 0px;
     width: 700px;
     height: 550px;
-    background: url("@{base-url}/img/splash.png") no-repeat;
+    background: url("@{base-url}/img/main.png") no-repeat;
     background-size: cover;
+    .well.ranking {
+      background-color: rgba(0,0,0,0.5);
+      top: 20px;
+      color: @white;
+      border: 5px solid white;
+      box-shadow: 0px 0px 5px @black;
+      border-radius: 5px;
+    }
     .gold-trophy { color: @gold;}
     .silver-trophy { color: @silver; }
     .bronze-trophy { color: @bronze; }
+    .game-instructions {
+      padding: 10px 0px;
+      font-size: 12pt;
+    }
     .game-options {
       position: absolute;
-      bottom: 100px;
+      bottom: 25px;
     }
   }
 /* styling for game screen */
   .game-view {
+    p { margin: 20px 0px; }
     .logo {
       content:url("@{base-url}/img/logo.png");
       border: none; 
     }
     .cards {
       display: inline-block;
+    }
+    .game-options {
+      margin-top: 50px;
     }
   }
 /* styling for modal */

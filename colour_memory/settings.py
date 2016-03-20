@@ -40,7 +40,6 @@ BOWER_INSTALLED_APPS = (
     'bootstrap',
     'font-awesome',
     'less',
-    'threejs',
     'toastr',
 )
     

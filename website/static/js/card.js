@@ -2,14 +2,14 @@ function Card(value) {
 	this.value = value;
 	this.hidden = true;
 	this.matched = false;
-	this.sound = new Audio("/static/audio/card-flip.mp3");
+	this.sound = GAME.AUDIO.CardFlip;
 }
 Card.prototype = {
 	
 	flip: function() {
 		if(this.matched) return;
 		this.hidden = !this.hidden;
-		this.sound.play();
+		if(GAME.PLAY_SOUND) { this.sound.play(); }
 	},
 	
 	matches: function(card) {

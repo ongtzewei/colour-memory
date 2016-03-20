@@ -9,7 +9,7 @@
 		$scope.submitScore = function() {
 			$scope.player.score = parentScope.state.score;
 			Player.post($scope.player, function(response) {
-				console.log(response);
+				parentScope.returnMain();
 			});
 		};
 		$scope.dismissModal = function() {

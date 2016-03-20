@@ -13,20 +13,36 @@
 			</div>
 			<div class="col-xs-4 text-center">
 				<img class="img-thumbnail logo">
-				<h1>Player's Score
-						<br>{[{state.score}]}
-					</h1>
-				<p>Find matching pairs before your time limit runs out!</p>
-				<div class="menu-options">
+				<p><h1>Score: {[{state.score}]}</h1></p>
+				<p class="text-justify">Find all matching pairs of cards using the least amount of steps possible!</p>
+				<ul class="list-unstyled text-left">
+					<li>Every wrong match: <strong>-5 points</strong></li>
+					<li>Every correct match: <strong>+10 points</strong></li>
+				</ul>
+				
+				<div class="game-options">
 					<button class="btn btn-block btn-warning" ng-click="restartGame();"><i class="fa fa-fw fa-refresh"></i> Restart</button>
 					<button class="btn btn-block btn-default" ng-click="toggleSound();" ng-class="[{'btn-danger':!playSound, 'btn-success':playSound}]">
 						<i class="fa fa-fw fa-times" ng-if="!playSound"></i>
 						<i class="fa fa-fw fa-music" ng-if="playSound"></i> Sound</button>
-					<a class="btn btn-block btn-default" ng-click="returnMain();"><i class="fa fa-fw fa-reply"></i> Back to Main</a>
+					<a class="btn btn-block btn-default" ng-click="promptExit();"><i class="fa fa-fw fa-reply"></i> Back to Main</a>
 				</div>
 			</div>
 		</div>
 		
+		<script id="modalGameExit" type="text/ng-template">
+			<div class="modal-body text-center">
+				<div class="row">
+					<div class="col-xs-6 col-xs-offset-3">
+						<h1>Exit game?</h1>
+						<p>Do you wish to exit? This game will not be saved.</p>
+						<button class="btn btn-block btn-danger" type="button" ng-click="returnMain()">Confirm</button>
+						<button class="btn btn-block btn-default" type="button" ng-click="dismissModal()">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</script>
+			
 		<script id="modalGameWin" type="text/ng-template">
 			<div class="modal-body text-center">
 				<div class="row">

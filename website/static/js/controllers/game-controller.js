@@ -6,11 +6,11 @@
 		$scope.cards = [];
 		$scope.exposedCards = [];
 		$scope.clearedCards = 0;
-		$scope.playSound = false;
 		$scope.state = undefined;
 		
 		$scope.toggleSound = function() {
 			$scope.playSound = (arguments.length)?arguments[0]:!$scope.playSound;
+			GAME.PLAY_SOUND = $scope.playSound;
 			if(!$scope.playSound) {
 				GAME.AUDIO.BGM.pause();
 				GAME.AUDIO.BGM.currentTime = 0;	
@@ -26,7 +26,7 @@
 			var randomized_cards = [];
 			
 			// initialize game sound
-			$scope.toggleSound(false);
+			$scope.toggleSound(GAME.PLAY_SOUND);
 			
 			// initialize game state
 			$scope.state = {
@@ -80,10 +80,12 @@
 						for(var i in $scope.exposedCards) {
 							$scope.exposedCards[i].matchFound();
 						}
-						$scope.state.score += GAME.MATCH_POINTS;
-						GAME.AUDIO.Match.play();
+						$scope.state.score += GAME.MATCH_REWARD;
 						$scope.clearedCards += GAME.REQUIRED_NUM_MATCHES;
 						$scope.exposedCards.length=0;
+						
+						if(GAME.PLAY_SOUND) { GAME.AUDIO.Match.play(); }
+						
 					} else {
 						$timeout(function() {
 							for(var i in $scope.exposedCards) {
@@ -92,7 +94,7 @@
 							$scope.exposedCards.length=0;
 						}, 1500);
 						$scope.state.score -= GAME.MISMATCH_PENALTY;
-						GAME.AUDIO.NoMatch.play();
+						if(GAME.PLAY_SOUND) { GAME.AUDIO.NoMatch.play(); }
 					}
 				break;
 			}
@@ -107,6 +109,21 @@
 				GAME.AUDIO.GameLose.play();
 				$scope.showModal(GAME.MODAL.GAME_LOSE);
 			}
+		};
+		
+		$scope.promptExit = function() {
+			var modalInstance = $uibModal.open({
+				animation: true,
+				backdrop: "static",
+				keyboard: false,
+				windowClass: "game-state",
+				windowTopClass: "modal-opacity",
+				templateUrl: "modalGameExit",
+				resolve: { 
+					parentScope: function() { return $scope },
+				},
+				controller: "GameModalCtrl",
+			});
 		};
 		
 		$scope.restartGame = function() {
