@@ -2,7 +2,7 @@
 {% load hosts %}
 {% load staticfiles %}
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -63,7 +63,7 @@
 						STARTING_SCORE: 100,
 						MATCH_REWARD: 10,
 						MISMATCH_PENALTY: 5,
-						PLAY_SOUND: false,
+						PLAY_SOUND: true,
 						AUDIO: {
 							BGM: new Audio("{% static 'audio/cautious.mp3' %}"),
 							Click: new Audio("{% static 'audio/click.mp3' %}"),
@@ -74,6 +74,8 @@
 							GameLose: new Audio("{% static 'audio/lose.wav' %}"),
 						},
 						MODAL: {
+							GAME_RESTART: "modalGameRestart",
+							GAME_EXIT: "modalGameExit",
 							GAME_WIN: "modalGameWin",
 							GAME_LOSE: "modalGameLose",
 						},

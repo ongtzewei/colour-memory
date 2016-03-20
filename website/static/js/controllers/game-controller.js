@@ -11,9 +11,9 @@
 		$scope.toggleSound = function() {
 			$scope.playSound = (arguments.length)?arguments[0]:!$scope.playSound;
 			GAME.PLAY_SOUND = $scope.playSound;
+			GAME.AUDIO.BGM.currentTime = 0;
 			if(!$scope.playSound) {
 				GAME.AUDIO.BGM.pause();
-				GAME.AUDIO.BGM.currentTime = 0;	
 			} else {
 				GAME.AUDIO.BGM.play();
 				GAME.AUDIO.BGM.loop = true;
@@ -112,18 +112,11 @@
 		};
 		
 		$scope.promptExit = function() {
-			var modalInstance = $uibModal.open({
-				animation: true,
-				backdrop: "static",
-				keyboard: false,
-				windowClass: "game-state",
-				windowTopClass: "modal-opacity",
-				templateUrl: "modalGameExit",
-				resolve: { 
-					parentScope: function() { return $scope },
-				},
-				controller: "GameModalCtrl",
-			});
+			$scope.showModal(GAME.MODAL.GAME_EXIT);
+		};
+		
+		$scope.promptRestart = function() {
+			$scope.showModal(GAME.MODAL.GAME_RESTART);
 		};
 		
 		$scope.restartGame = function() {
@@ -131,7 +124,6 @@
 		};
 		
 		$scope.returnMain = function() {
-			console.log("returning");
 			GAME.AUDIO.BGM.pause();
 			$state.go("home");
 		};
@@ -142,7 +134,6 @@
 				backdrop: "static",
 				keyboard: false,
 				windowClass: "game-state",
-				windowTopClass: "modal-opacity",
 				templateUrl: modalId,
 				resolve: { 
 					parentScope: function() { return $scope },
