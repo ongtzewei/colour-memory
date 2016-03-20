@@ -9,6 +9,7 @@
 		$scope.submitScore = function() {
 			$scope.player.score = parentScope.state.score;
 			Player.post($scope.player, function(response) {
+				$uibModalInstance.dismiss('cancel');
 				parentScope.returnMain();
 			});
 		};

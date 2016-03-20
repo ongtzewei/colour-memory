@@ -55,6 +55,8 @@
 		$scope.flipCard = function(card) {
 			// prevent exposed cards from exceeding the required number
 			if($scope.exposedCards.length==GAME.REQUIRED_NUM_MATCHES) return;
+			// prevent exposed cards from being counted again
+			if($.inArray(card, $scope.exposedCards)>=0) return;
 			
 			card.flip();
 			$scope.exposedCards.push(card);
@@ -101,12 +103,18 @@
 			
 			// no more uncovered cards, player wins
 			if($scope.clearedCards==GAME.NUM_CARDS) {
-				GAME.AUDIO.GameWin.play();
+				if(GAME.PLAY_SOUND) {
+					GAME.AUDIO.GameWin.play();
+				}
+				GAME.AUDIO.BGM.pause();
 				$scope.showModal(GAME.MODAL.GAME_WIN);
 			}
 			// when score reaches zero, player loses
 			if($scope.state.score<=0) {
-				GAME.AUDIO.GameLose.play();
+				if(GAME.PLAY_SOUND) {
+					GAME.AUDIO.GameLose.play();	
+				}
+				GAME.AUDIO.BGM.pause();
 				$scope.showModal(GAME.MODAL.GAME_LOSE);
 			}
 		};
