@@ -53,7 +53,6 @@
 		};
 		
 		$scope.flipCard = function(card) {	
-			$scope.showModal(GAME.MODAL.GAME_WIN);
 			// prevent exposed cards from exceeding the required number
 			if($scope.exposedCards.length==GAME.REQUIRED_NUM_MATCHES) return;
 			// prevent exposed cards from being counted again
