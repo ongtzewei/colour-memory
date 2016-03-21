@@ -1,4 +1,4 @@
-<div class="home-view" ng-init="initHome();">
+<div class="home-view" ng-init="initHome();" >
 	<div class="row">
 		<div class="col-xs-8 col-xs-offset-2 well ranking">
 			<h1 class="text-center"><i class="fa fa-fw fa-trophy"></i> Today's Ranking</h1>
@@ -11,12 +11,15 @@
 			</ul>
 			<hr>
 			<p class="text-justify">Challenge yourself and find all matching pairs of cards using the least amount of steps possible!
-				Every wrong match results in a deduction of 5 points while every correct match increases your score by 10 points.
+				You start with a score of 12 points.
+				Every wrong match results in a deduction of 1 point while every correct match increases your score by 1 points.
 				Submit your score and rank youself against all other daily players! 
 			</p>
 		</div>
 		<div class="col-xs-6 col-xs-offset-3 game-options">
-			<a class="btn btn-lg btn-block btn-primary" ui-sref="game"><i class="fa fa-fw fa-gamepad"></i> Start Game</a>
+			<button class="btn btn-lg btn-block btn-primary" ng-click="startGame();" ng-keypress="startGame();">
+				<i class="fa fa-fw fa-gamepad"></i> Start Game
+			</button>
 		</div>
 	</div>
 </div>

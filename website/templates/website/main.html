@@ -22,9 +22,11 @@
 
 {% block javascript %}
 {{block.super}}
+<script src="{% static 'js/controllers/app-controller.js' %}"></script>
 <script src="{% static 'js/controllers/splash-controller.js' %}"></script>
 <script src="{% static 'js/controllers/home-controller.js' %}"></script>
 <script src="{% static 'js/controllers/game-controller.js' %}"></script>
+<script src="{% static 'js/controllers/ranking-controller.js' %}"></script>
 <script src="{% static 'js/controllers/game-modal-controller.js' %}"></script>
 <script type="text/javascript">
 (function() {
@@ -49,11 +51,18 @@
 			templateUrl: "{% static 'html/game.html' %}",
 			controller: "GameCtrl",
 		};
+		var rankingState = {
+			name: "ranking",
+			url: "/ranking", 
+			templateUrl: "{% static 'html/ranking.html' %}",
+			controller: "RankingCtrl",
+		};
 		$urlRouterProvider.when("", "/");
 		$stateProvider
 			.state(splashState)
 			.state(homeState)
-			.state(gameState);
+			.state(gameState)
+			.state(rankingState);
 	});
 })();
 </script>

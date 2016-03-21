@@ -1,0 +1,17 @@
+<div class="ranking-view" ng-controller="RankingCtrl" ng-init="initRanking();">
+	<div class="row text-center">
+		<div class="col-xs-6 col-xs-offset-3 ranking">
+			<h2 class="text-center"><i class="fa fa-fw fa-trophy"></i> Congratulation!</h2>
+			<p>Your ranking, with a score of <strong>{[{ranking.score}]}</strong> for today is <strong>#{[{ranking.position}]}!</strong></p>
+		</div>
+		<div class="col-xs-6 col-xs-offset-3 game-options">
+			<button class="btn btn-lg btn-block btn-primary" ng-click="restartGame();">
+				<i class="fa fa-fw fa-gamepad"></i> New Game
+			</button>
+			<button class="btn btn-lg btn-block btn-success" ng-click="returnMain();">
+				<i class="fa fa-fw fa-reply"></i> Back to Main
+			</button>
+		</div>
+	</div>
+</div>
+		

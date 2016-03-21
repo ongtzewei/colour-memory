@@ -52,7 +52,8 @@
 			}
 		};
 		
-		$scope.flipCard = function(card) {
+		$scope.flipCard = function(card) {	
+			$scope.showModal(GAME.MODAL.GAME_WIN);
 			// prevent exposed cards from exceeding the required number
 			if($scope.exposedCards.length==GAME.REQUIRED_NUM_MATCHES) return;
 			// prevent exposed cards from being counted again
@@ -127,6 +128,10 @@
 			$scope.showModal(GAME.MODAL.GAME_RESTART);
 		};
 		
+		$scope.showRanking = function() {
+			$state.go("ranking");
+		};
+		
 		$scope.restartGame = function() {
 			$state.go($state.current, {}, {reload: true});
 		};
@@ -149,7 +154,5 @@
 				controller: "GameModalCtrl",
 			});
 		};
-		
 	});
-	
 })();

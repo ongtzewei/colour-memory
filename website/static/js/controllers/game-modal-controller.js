@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 	var app = angular.module("gameApp");
-	app.controller("GameModalCtrl", function($scope, $uibModalInstance, parentScope, Player) {
+	app.controller("GameModalCtrl", function($scope, $cookieStore, $uibModalInstance, parentScope, Player) {
 		$scope.restartGame = function() {
 			$uibModalInstance.dismiss('cancel');
 			parentScope.restartGame();
@@ -10,7 +10,8 @@
 			$scope.player.score = parentScope.state.score;
 			Player.post($scope.player, function(response) {
 				$uibModalInstance.dismiss('cancel');
-				parentScope.returnMain();
+				$cookieStore.put('ranking', response);
+				parentScope.showRanking();
 			});
 		};
 		$scope.dismissModal = function() {
