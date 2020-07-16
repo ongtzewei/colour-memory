@@ -16,16 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%2^7jv0tnbk$-*@qr*p0yfn)#knk==o!mbpvdce!+k8jv+q#*5'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+SECRET_KEY = '123'
 
 
 # Application definition
@@ -62,6 +54,17 @@ BOWER_INSTALLED_APPS = (
     'less',
 )
 
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+
 MIDDLEWARE = [
     'django_hosts.middleware.HostsRequestMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -94,12 +97,15 @@ REST_FRAMEWORK = {
     ]
 }
 
-ROOT_URLCONF = 'colour_memory.urls'
+
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, '../api/templates'),
+            os.path.join(BASE_DIR, '../website/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,36 +118,29 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'colour_memory.wsgi.application'
+ROOT_URLCONF = 'website.urls'
+ROOT_HOSTCONF = 'colour_memory.hosts'
+
+ALLOWED_HOSTS = ('*',)
+DEFAULT_HOST = 'default'
+PARENT_HOST = ''
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_REPLACE_HTTPS_REFERER = True
 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 
@@ -149,13 +148,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -163,6 +158,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../uploads')
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'website/static')
+
+# cookie setting
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+CSRF_COOKIE_DOMAIN = SESSION_COOKIE_DOMAIN = '*'
+SESSION_COOKIE_NAME = 'colour_memory'
+SESSION_COOKIE_AGE = 1209600
+CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY =  SESSION_COOKIE_HTTPONLY = False
+SESSION_COOKIE_PATH = CSRF_COOKIE_PATH = '/'
+SESSION_SAVE_EVERY_REQUEST = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_FILE_PATH = None
 
 
-from .local_settings import *
