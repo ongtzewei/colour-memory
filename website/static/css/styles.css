@@ -1,1 +1,68 @@
-card{display:inline-block;width:80px;height:120px;padding:3px 5px;margin:10px;transition:.6s;transform-style:preserve-3d;position:relative}card .front,card .back{width:80px;height:120px;border-radius:8px;backface-visibility:hidden;position:absolute;top:0;left:0}card .front{z-index:2;transform:rotateY(180deg)}card .front.card0{background:url("//urbanstyle.asia/static/img/card0.gif") no-repeat center;background-size:cover}card .front.card1{background:url("//urbanstyle.asia/static/img/card1.gif") no-repeat center;background-size:cover}card .front.card2{background:url("//urbanstyle.asia/static/img/card2.gif") no-repeat center;background-size:cover}card .front.card3{background:url("//urbanstyle.asia/static/img/card3.gif") no-repeat center;background-size:cover}card .front.card4{background:url("//urbanstyle.asia/static/img/card4.gif") no-repeat center;background-size:cover}card .front.card5{background:url("//urbanstyle.asia/static/img/card5.gif") no-repeat center;background-size:cover}card .front.card6{background:url("//urbanstyle.asia/static/img/card6.gif") no-repeat center;background-size:cover}card .front.card7{background:url("//urbanstyle.asia/static/img/card7.gif") no-repeat center;background-size:cover}card .back{background:url("//urbanstyle.asia/static/img/back.gif") no-repeat center;background-size:cover;transform:rotateY(0deg)}card.flip{transform:rotateY(180deg)}card.fade-out{opacity:0;transition:opacity 1s linear}html{background:#000}html body.container-fluid{width:720px;height:576px;background:#fff;position:relative;margin:0;padding:0}html body.container-fluid [ui-view].ng-enter,html body.container-fluid [ui-view].ng-leave{position:absolute;left:0;right:0;transition:all .5s ease-in-out}html body.container-fluid [ui-view].ng-enter{opacity:0;transform:scale3d(0.5,0.5,0.5)}html body.container-fluid [ui-view].ng-enter-active{opacity:1;transform:scale3d(1,1,1)}html body.container-fluid [ui-view].ng-leave{opacity:1;transform:translate3d(0,0,0)}html body.container-fluid [ui-view].ng-leave-active{opacity:0;transform:translate3d(100px,0,0)}html body.container-fluid .animated-loading{position:absolute;bottom:2px;right:2px;width:120px;height:120px;background:url("//urbanstyle.asia/static/img/loading.gif") no-repeat;z-index:9999}html .splash-view{opacity:0}html .splash-view.fade-in{background:url("//urbanstyle.asia/static/img/splash.png") no-repeat;background-size:cover;width:700px;height:550px;opacity:1;transition:opacity 2s ease-in}html .home-view{margin:10px 0;width:700px;height:550px;background:url("//urbanstyle.asia/static/img/main.png") no-repeat;background-size:cover}html .home-view .well.ranking{background-color:rgba(0,0,0,0.5);top:20px;color:#fff;border:5px solid white;box-shadow:0 0 5px #000;border-radius:5px}html .home-view .gold-trophy{color:#ffdf00}html .home-view .silver-trophy{color:#c0c0c0}html .home-view .bronze-trophy{color:#cd7f32}html .home-view .game-instructions{padding:10px 0;font-size:12pt}html .home-view .game-options{position:absolute;bottom:25px}html .game-view p{margin:20px 0}html .game-view .logo{content:url("//urbanstyle.asia/static/img/logo.png");border:0}html .game-view .cards{display:inline-block}html .game-view .game-options{margin-top:50px}html .modal.game-state{position:absolute!important}html .modal.game-state .input-group{box-shadow:none;margin-bottom:5px}html .ranking-view{margin:10px 0}
+card {
+  display: inline-block;
+  width: 80px;
+  height: 120px;
+  padding: 3px 5px;
+  margin: 10px;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+card .front,
+card .back {
+  width: 80px;
+  height: 120px;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+card .front {
+  z-index: 2;
+  transform: rotateY(180deg);
+}
+card .front.card0 {
+  background: url("//fruitloops.com:8080/static/img/card0.gif") no-repeat center;
+  background-size: cover;
+}
+card .front.card1 {
+  background: url("//fruitloops.com:8080/static/img/card1.gif") no-repeat center;
+  background-size: cover;
+}
+card .front.card2 {
+  background: url("//fruitloops.com:8080/static/img/card2.gif") no-repeat center;
+  background-size: cover;
+}
+card .front.card3 {
+  background: url("//fruitloops.com:8080/static/img/card3.gif") no-repeat center;
+  background-size: cover;
+}
+card .front.card4 {
+  background: url("//fruitloops.com:8080/static/img/card4.gif") no-repeat center;
+  background-size: cover;
+}
+card .front.card5 {
+  background: url("//fruitloops.com:8080/static/img/card5.gif") no-repeat center;
+  background-size: cover;
+}
+card .front.card6 {
+  background: url("//fruitloops.com:8080/static/img/card6.gif") no-repeat center;
+  background-size: cover;
+}
+card .front.card7 {
+  background: url("//fruitloops.com:8080/static/img/card7.gif") no-repeat center;
+  background-size: cover;
+}
+card .back {
+  background: url("//fruitloops.com:8080/static/img/back.gif") no-repeat center;
+  background-size: cover;
+  transform: rotateY(0deg);
+}
+card.flip {
+  transform: rotateY(180deg);
+}
+card.fade-out {
+  opacity: 0;
+  transition: opacity 1s linear;
+}
